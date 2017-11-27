@@ -32,9 +32,9 @@ def webhook():
 	# endpoint for processing incoming messaging events
 
 	data = request.data
-	# dataDict = json.loads ( data ,encoding = 'utf-8')
-	# logJsn(dataDict)
 	print data
+	dataDict = json.loads ( data ,encoding = 'utf-8')
+	logJsn(dataDict)
 	return "POST ok", 200
 
 if __name__ == '__main__':
