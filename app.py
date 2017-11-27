@@ -20,7 +20,7 @@ def verify():
 	#     return request.args["hub.challenge"], 200
 	data = request.data
 	dataDict = json.loads(data, encoding='utf-8')
-	print dataDict
+	logJsn(dataDict)
 
 	return "GET Ok", 200
 
@@ -32,7 +32,7 @@ def webhook():
 
 	data = request.data
 	dataDict = json.loads ( data ,encoding = 'utf-8')
-	print dataDict
+	logJsn(dataDict)
 	return "POST ok", 200
 
 if __name__ == '__main__':
