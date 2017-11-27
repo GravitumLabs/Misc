@@ -18,9 +18,10 @@ def verify():
 	#     if not request.args.get("hub.verify_token") == os.environ["VERIFY_TOKEN"]:
 	#         return "Verification token mismatch", 403
 	#     return request.args["hub.challenge"], 200
-	data = request.get_json()
-	logJsn(data)
-	data=request.get_json()
+	data = request.data
+	dataDict = json.loads(data, encoding='utf-8')
+	print dataDict
+
 	return "GET Ok", 200
 
 
@@ -29,8 +30,9 @@ def webhook():
 
 	# endpoint for processing incoming messaging events
 
-	data = request.get_json()
-	logJsn(data)  # you may not want to log every incoming message in production, but it's good for testing
+	data = request.data
+	dataDict = json.loads ( data ,encoding = 'utf-8')
+	print dataDict
 	return "POST ok", 200
 
 if __name__ == '__main__':
