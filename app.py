@@ -19,8 +19,9 @@ def verify():
 	#         return "Verification token mismatch", 403
 	#     return request.args["hub.challenge"], 200
 	data = request.data
-	dataDict = json.loads(data, encoding='utf-8')
-	logJsn(dataDict)
+	# dataDict = json.loads(data, encoding='utf-8')
+	# logJsn(dataDict)
+	print data
 
 	return "GET Ok", 200
 
@@ -31,8 +32,9 @@ def webhook():
 	# endpoint for processing incoming messaging events
 
 	data = request.data
-	dataDict = json.loads ( data ,encoding = 'utf-8')
-	logJsn(dataDict)
+	# dataDict = json.loads ( data ,encoding = 'utf-8')
+	# logJsn(dataDict)
+	print data
 	return "POST ok", 200
 
 if __name__ == '__main__':
