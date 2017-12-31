@@ -32,7 +32,6 @@ def webhook():
 	# endpoint for processing incoming messaging events
 
 	data = request.data
-	print data
 	dataDict = json.loads ( data ,encoding = 'utf-8')
 	logJsn(dataDict)
 	return "POST ok", 200

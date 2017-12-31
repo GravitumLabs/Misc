@@ -55,7 +55,7 @@ def send_text_message(sendto_id, message_text, type=None, payload=None):
     return
 
 
-def sendTo_FBMsgAPI(sendto_id, data, type=None):
+def sendTo_FBMsgAPI(data):
     params = {
         "access_token": getServerConfig(key="PAGE_ACCESS_TOKEN")
     }
@@ -119,7 +119,7 @@ def sendCustomShare(sharerID, gameID, liveMatchID, sharer_title, sharer_image_ur
             }
         }
     })
-    code = sendTo_FBMsgAPI(sharerID, data)
+    code = sendTo_FBMsgAPI(data)
     return code
 
 
@@ -177,7 +177,7 @@ def sendListImages(sendto_id, imgElementArray=[]):
             }
         }
     })
-    sendTo_FBMsgAPI(sendto_id, data)
+    sendTo_FBMsgAPI(data)
 
 
 def sendImageURL(playerID, url):
@@ -194,7 +194,7 @@ def sendImageURL(playerID, url):
             }
         }
     })
-    sendTo_FBMsgAPI(playerID, data, type)
+    sendTo_FBMsgAPI( data)
     return
 
 
@@ -213,7 +213,7 @@ def sendAttachment(playerID, fileURL, type):
         }
     }
     dataStr = json.dumps(data)
-    sendTo_FBMsgAPI(playerID, data=dataStr)
+    sendTo_FBMsgAPI(data=dataStr)
     return
 
 
@@ -273,7 +273,7 @@ def sendQuickReplyButtons(psUserID, headline, btns):
         }
     }
     dataStr = json.dumps(data)
-    sendTo_FBMsgAPI(sendto_id=psUserID, data=dataStr)
+    sendTo_FBMsgAPI(data=dataStr)
     return
 
 
@@ -300,7 +300,7 @@ def sendPhoneToCall(psUserID, headline, phoneNumber, buttonTitle="Call Represent
         }
     }
     dataStr = json.dumps(data)
-    sendTo_FBMsgAPI(sendto_id=psUserID, data=dataStr)
+    sendTo_FBMsgAPI(data=dataStr)
     return
 
 
@@ -314,7 +314,7 @@ def send_userRef_message(user_ref, message_text):
         },
         "message": msg
     })
-    r = sendTo_FBMsgAPI(user_ref, data, type)
+    r = sendTo_FBMsgAPI(data)
     psUserID = None
     if r.status_code == 200:
         data = json.loads(r.text)
@@ -354,7 +354,7 @@ def sendWebURL(psFbId, imgURL, title, subtitle,buttons):
         }
     }
     dataStr = json.dumps(data)
-    r = sendTo_FBMsgAPI(sendto_id=psFbId, data=dataStr)
+    r = sendTo_FBMsgAPI(data=dataStr)
     if r.status_code == 200:
         print "All OK"
 
@@ -465,6 +465,13 @@ def sendGenerictemplate(sendto_id, title=None, image_url=None, subtitle=None, bu
             }
         }
     })
-    sendTo_FBMsgAPI(sendto_id, data)
+    sendTo_FBMsgAPI(data)
     return
 
+def sendMobileMessage(phone_number,txt):
+    data=json.dumps({"recipient": {"phone_number": phone_number, "name": {"first_name": "Jenny", "last_name": "Doe"}},
+          "message":{"text":txt}})
+
+    sendTo_FBMsgAPI(data)
+
+    return
